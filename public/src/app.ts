@@ -14,11 +14,12 @@ export default class App {
 
         this.SDK3DVerse = SDK3DVerse; // TODO: SDK3DVerse is a global variable, do not change this line, and ignore the error !!!
         // this.ManorData = new ManorData();
-        this.test();
     }
     
     private async test() {
-        await this.SDK3DVerse.engineAPI.findEntitiesByEUID("ed5186d6-ee8d-416c-a4dd-bef4bb6d9622")
+        const res = await this.SDK3DVerse.engineAPI.findEntitiesByEUID("ed5186d6-ee8d-416c-a4dd-bef4bb6d9622");
+        console.log("res : ", res);
+        return res;
     }
 
     private replaceMessage() : void {
@@ -31,6 +32,7 @@ export default class App {
     }
 
     public startingScene() {
+        this.test();
         console.log(`SDK3DVerse ${this.SDK3DVerse}`)
         console.log(`SDK3DVerse.webAPI ${JSON.stringify(this.SDK3DVerse.webAPI)}`)
         this.SDK3DVerse.webAPI.createOrJoinSession(AppConfig.SCENE_UUID).then((connectionInfo) => {
