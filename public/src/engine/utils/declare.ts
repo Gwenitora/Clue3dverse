@@ -10,6 +10,7 @@ declare module 'SDK3DVerse.js' {
     }
     export const setupDisplay: (canvas: HTMLElement | null) => void;
     export const startStreamer: (connectionInfo: any) => void;
+    export function connectToEditor(): Promise<void>;
   }
 }
 

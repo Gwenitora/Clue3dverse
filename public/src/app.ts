@@ -22,7 +22,9 @@ export default class App {
             this.SDK3DVerse.setupDisplay(document.getElementById('display_canvas'));
             this.SDK3DVerse.startStreamer(connectionInfo);
 
-            console.log("App started");
+            this.SDK3DVerse.connectToEditor().then(() => {
+                console.log("App started");
+            })
         }).catch((err) => {
             console.error(err);
         });
