@@ -3,9 +3,12 @@ import { AllRoomsNames, AllRoomsIds, RoomsDataTypes, rooms } from "./manorDatas.
 
 export default class ManorData {
     private manorData: RoomsDataTypes;
+    private defaultRoom: AllRoomsNames = "Corridors";
+    public gameSize: vect2;
 
     constructor() {
         this.manorData = rooms;
+        this.gameSize = this.getRoomSize(this.defaultRoom);
     }
 
     public getIdWithName(name: AllRoomsNames): AllRoomsIds {
@@ -69,11 +72,15 @@ export default class ManorData {
         return hasRoom;
     }
 
-    public grtIfVoidOnCoordinates(coordinates: vect2): boolean {
+    public getIfVoidOnCoordinates(coordinates: vect2): boolean {
         if (this.getIfRoomsOnCoordinates(coordinates)) {
-            return this.getIfRoomOnCoordinates("Corridors", coordinates)
+            return this.getIfRoomOnCoordinates(this.defaultRoom, coordinates)
         } else {
             return false
         }
+    }
+
+    public getRoomSize(name: AllRoomsNames | AllRoomsIds): vect2 {
+        return {x: this.manorData[this.getNameWithIdOrName(name)].data[0].length, y: this.manorData[this.getNameWithIdOrName(name)].data.length}
     }
 }
