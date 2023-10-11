@@ -27,6 +27,8 @@ export type RoomsDataTypes = {
 
 export type AllRoomsNames = KeyOfObject<RoomsDataTypes>;
 
+export type AllRooms = AllRoomsIds | AllRoomsNames;
+
 export const rooms: RoomsDataTypes = {
     Corridors: { //* NOTE -Corridors- NOTE *//
         coordinates: {

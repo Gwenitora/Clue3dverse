@@ -5,7 +5,7 @@ import ManorData from "./scripts/generation/manorDataParse.js";
 export default class App {
     INSTANCE?: App;
     public SDK3DVerse: typeof _SDK3DVerse;
-    public ManorData : ManorData;
+    // public ManorData : ManorData;
 
     constructor() {
         if (!this.INSTANCE) {
@@ -13,7 +13,12 @@ export default class App {
         }
 
         this.SDK3DVerse = SDK3DVerse; // TODO: SDK3DVerse is a global variable, do not change this line, and ignore the error !!!
-        this.ManorData = new ManorData();
+        // this.ManorData = new ManorData();
+        this.test();
+    }
+    
+    private async test() {
+        await this.SDK3DVerse.engineAPI.findEntitiesByEUID("ed5186d6-ee8d-416c-a4dd-bef4bb6d9622")
     }
 
     private replaceMessage() : void {
@@ -66,23 +71,8 @@ export default class App {
         });
 
         this.replaceMessage()
-
-        let map = "";
-        for (let j = 0; j < this.ManorData.gameSize.y; j++) {
-            for (let i = 0; i < this.ManorData.gameSize.x; i++) {
-                if (this.ManorData.getIfRoomsOnCoordinates({ x: i, y: j })) {
-                    if (this.ManorData.getIfVoidOnCoordinates({ x: i, y: j })) {
-                        map += " "
-                    } else {
-                        map += "X"
-                    }
-                } else {
-                    map += "O"
-                }
-            }
-            map += "\n"
-        }
-        console.log(map)
+        
+        // console.log(this.ManorData.map)
    }
 }
 
