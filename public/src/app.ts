@@ -4,6 +4,7 @@ import AppConfig from "./engine/utils/AppConfig.js";
 export default class App {
     INSTANCE?: App;
     public SDK3DVerse: typeof _SDK3DVerse;
+    // public Entity : Entity;
 
     constructor() {
         if (!this.INSTANCE) {
@@ -11,6 +12,15 @@ export default class App {
         }
 
         this.SDK3DVerse = SDK3DVerse; // TODO: SDK3DVerse is a global variable, do not change this line, and ignore the error !!!
+    }
+
+    private replaceMessage() : void {
+        let message = document.getElementById("message");
+
+        setInterval(this.replaceMessage, 5000)
+        if (message?.innerHTML){
+            message.innerHTML = "";
+        }
     }
 
     public startingScene() {
@@ -47,19 +57,13 @@ export default class App {
             if (message) {
                 message.innerHTML = status.message;
             }
+            // console.log(typeof this.SDK3DVerse?.engineAPI.findEntitiesByEUID("ed5186d6-ee8d-416c-a4dd-bef4bb6d9622"))
+            // const entity = this.SDK3DVerse?.engineAPI.findEntitiesByEUID("ed5186d6-ee8d-416c-a4dd-bef4bb6d9622")
+            // console.log("entité : ", entity)
+
         });
 
-        function replaceMessage() : void {
-            let message = document.getElementById("message");
-
-            setInterval(replaceMessage, 5000)
-            if (message?.innerHTML){
-                message.innerHTML = "";
-            }
-        }
-        
-        replaceMessage()
-
+        this.replaceMessage()
    }
 }
 
@@ -67,4 +71,5 @@ new App();
 
 window.addEventListener('load', () => {
     new App().INSTANCE?.startingScene();
+    new App().INSTANCE?.SDK3DVerse.actionMap.setFrenchKeyboardBindings();
 });
