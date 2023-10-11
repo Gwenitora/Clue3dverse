@@ -10,3 +10,7 @@ declare module 'https://cdn.3dverse.com/legacy/sdk/stable/SDK3DVerse.js' {
     export const setupDisplay: (canvas: HTMLElement | null) => void;
     export const startStreamer: (connectionInfo: any) => void;
 }
+
+declare module 'https://cdn.3dverse.com/legacy/sdk/stable/SDK3DVerse_VirtualJoystick_Ext.js' {
+    
+}
