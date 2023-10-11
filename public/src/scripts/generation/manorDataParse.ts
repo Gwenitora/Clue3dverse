@@ -65,6 +65,7 @@ export default class ManorData {
     // ---------------------------------------------------------------------------------------------------------------------------------------------------------- \\
     // Permet de savoir si une entité est présent dans une salle à partir de leurs coordonnées
     public getIfRoomOnCoordinates(name: AllRoomsNames | AllRoomsIds, coordinates: vect2): boolean {
+        coordinates = { ...coordinates }
         const manor = this.manorData[this.getNameWithIdOrName(name)]
         const roomCoordinates = manor.coordinates;
         const roomData = manor.data;

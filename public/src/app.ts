@@ -5,7 +5,7 @@ import ManorData from "./scripts/generation/manorDataParse.js";
 export default class App {
     INSTANCE?: App;
     public SDK3DVerse: typeof _SDK3DVerse;
-    // public ManorData : ManorData;
+    public ManorData : ManorData;
 
     constructor() {
         if (!this.INSTANCE) {
@@ -13,7 +13,7 @@ export default class App {
         }
 
         this.SDK3DVerse = SDK3DVerse; // TODO: SDK3DVerse is a global variable, do not change this line, and ignore the error !!!
-        // this.ManorData = new ManorData();
+        this.ManorData = new ManorData();
     }
     
     private async test() {
@@ -34,16 +34,7 @@ export default class App {
     public async startingScene() {
         console.log(`SDK3DVerse ${this.SDK3DVerse}`)
         console.log(`SDK3DVerse.webAPI ${JSON.stringify(this.SDK3DVerse.webAPI)}`)
-        this.SDK3DVerse.webAPI.createOrJoinSession(AppConfig.SCENE_UUID).then((connectionInfo) => {
-            console.log(`connectionInfo: ${JSON.stringify(connectionInfo)}`)
-
-            this.SDK3DVerse.setupDisplay(document.getElementById('display_canvas'));
-            this.SDK3DVerse.startStreamer(connectionInfo);
-
-            this.SDK3DVerse.connectToEditor()
-        }).catch((err) => {
-            console.error(err);
-        });
+        const connectionInfo = await this.SDK3DVerse.webAPI.createOrJoinSession(AppConfig.SCENE_UUID)
 
         this.SDK3DVerse.notifier.on('onLoadingStarted', () => {
             let message = document.getElementById("message");
@@ -70,6 +61,13 @@ export default class App {
             // console.log("entité : ", entity)
 
         });
+
+        console.log(`connectionInfo: ${JSON.stringify(connectionInfo)}`)
+
+        this.SDK3DVerse.setupDisplay(document.getElementById('display_canvas'));
+        this.SDK3DVerse.startStreamer(connectionInfo);
+
+        this.SDK3DVerse.connectToEditor()
 
         await this.SDK3DVerse.onEditorConnected();
         console.log("App started");
