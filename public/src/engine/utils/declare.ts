@@ -15,10 +15,6 @@ declare module 'SDK3DVerse.js' {
       function findEntitiesByEUID(euid : string) : {};
     }
 
-    export module engineAPI{
-      function findEntitiesByEUID(euid : string) : {};
-    }
-
     export module actionMap{
       function setFrenchKeyboardBindings() : void;
     }
