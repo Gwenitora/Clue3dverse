@@ -1,3 +1,4 @@
+import { vect2 } from "../../engine/utils/Types";
 import { AllRoomsNames, AllRoomsIds, RoomsDataTypes, rooms } from "./manorDatas";
 
 export default class ManorData {
@@ -45,4 +46,10 @@ export default class ManorData {
     }
 
     public getIfRoomOnCoordinates(name: AllRoomsNames | AllRoomsIds, coordinates: vect2): boolean {
+        return this.manorData[this.getNameWithIdOrName(name)].coordinates.x === coordinates.x && this.manorData[this.getNameWithIdOrName(name)].coordinates.y === coordinates.y;
+    }
+
+    public getIfRoomsOnCoordinates(coordinates: vect2): boolean {
+        return false
+    }
 }

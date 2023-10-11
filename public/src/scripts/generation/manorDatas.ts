@@ -3,7 +3,7 @@ export type KeyOfObject<T> = keyof T;
 export type AllRoomsIds = -1 | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
 
 export type RoomDataType = {
-    cordinates: {
+    coordinates: {
         x: number,
         y: number
     }
@@ -30,7 +30,7 @@ export type AllRoomsNames = KeyOfObject<RoomsDataTypes>;
 
 export const rooms: RoomsDataTypes = {
     Corridors: { //* NOTE -Corridors- NOTE *//
-        cordinates: {
+        coordinates: {
             x: 0,
             y: 0
         },
@@ -65,7 +65,7 @@ export const rooms: RoomsDataTypes = {
         ]
     },
     Staircase: { //* NOTE -Staircase- NOTE *//
-        cordinates: {
+        coordinates: {
             x: 10,
             y: 10
         },
@@ -82,7 +82,7 @@ export const rooms: RoomsDataTypes = {
         ]
     },
     Kitchen: { //* NOTE -Kitchen- NOTE *//
-        cordinates: {
+        coordinates: {
             x: 0,
             y: 1
         },
@@ -98,7 +98,7 @@ export const rooms: RoomsDataTypes = {
         ]
     },
     ReceptionHall: { //* NOTE -ReceptionHall- NOTE *//
-        cordinates: {
+        coordinates: {
             x: 8,
             y: 1
         },
@@ -115,7 +115,7 @@ export const rooms: RoomsDataTypes = {
         ]
     },
     Bathroom: { //* NOTE -Bathroom- NOTE *//
-        cordinates: {
+        coordinates: {
             x: 18,
             y: 1
         },
@@ -130,7 +130,7 @@ export const rooms: RoomsDataTypes = {
         ]
     },
     LivingRoom: { //* NOTE -LivingRoom- NOTE *//
-        cordinates: {
+        coordinates: {
             x: 0,
             y: 9
         },
@@ -147,7 +147,7 @@ export const rooms: RoomsDataTypes = {
         ]
     },
     GameRoom: { //* NOTE -GameRoom- NOTE *//
-        cordinates: {
+        coordinates: {
             x: 18,
             y: 8
         },
@@ -162,7 +162,7 @@ export const rooms: RoomsDataTypes = {
         ]
     },
     Library: { //* NOTE -Library- NOTE *//
-        cordinates: {
+        coordinates: {
             x: 17,
             y: 14
         },
@@ -177,7 +177,7 @@ export const rooms: RoomsDataTypes = {
         ]
     },
     MainHall: { //* NOTE -MainHall- NOTE *//
-        cordinates: {
+        coordinates: {
             x: 0,
             y: 19
         },
@@ -193,7 +193,7 @@ export const rooms: RoomsDataTypes = {
         ]
     },
     Hall: { //* NOTE -Hall- NOTE *//
-        cordinates: {
+        coordinates: {
             x: 9,
             y: 18
         },
@@ -210,7 +210,7 @@ export const rooms: RoomsDataTypes = {
         ]
     },
     Office: { //* NOTE -Office- NOTE *//
-        cordinates: {
+        coordinates: {
             x: 17,
             y: 21
         },
