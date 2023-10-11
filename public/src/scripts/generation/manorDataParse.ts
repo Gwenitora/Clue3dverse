@@ -48,7 +48,7 @@ export default class ManorData {
 
     // ---------------------------------------------------------------------------------------------------------------------------------------------------------- \\
     // Permet d'avoir l'id de la pièce avec un id ou un nom
-    public getIdWithNameOrId(name: AllRoomsNames | AllRoomsIds): AllRoomsIds {
+    public getIdWithNameOrId(name: AllRooms): AllRoomsIds {
         if (this.getIfIsName(name as AllRoomsNames)) {
             return this.getIdWithName(name as AllRoomsNames);
         } else {
@@ -58,13 +58,13 @@ export default class ManorData {
 
     // ---------------------------------------------------------------------------------------------------------------------------------------------------------- \\
     // Permet d'avoir l'UUID d'une pièce à partir d'un nom ou d'un id
-    public getRoomUUID(name: AllRoomsNames | AllRoomsIds): string {
+    public getRoomUUID(name: AllRooms): string {
         return this.manorData[this.getNameWithIdOrName(name)].uuid;
     }
 
     // ---------------------------------------------------------------------------------------------------------------------------------------------------------- \\
     // Permet de savoir si une entité est présent dans une salle à partir de leurs coordonnées
-    public getIfRoomOnCoordinates(name: AllRoomsNames | AllRoomsIds, coordinates: vect2): boolean {
+    public getIfRoomOnCoordinates(name: AllRooms, coordinates: vect2): boolean {
         coordinates = { ...coordinates }
         const manor = this.manorData[this.getNameWithIdOrName(name)]
         const roomCoordinates = manor.coordinates;
@@ -103,7 +103,7 @@ export default class ManorData {
     
     // ---------------------------------------------------------------------------------------------------------------------------------------------------------- \\
     // Permet d'obtenir la taille du plateau de jeu en entier
-    private getRoomSize(name: AllRoomsNames | AllRoomsIds): vect2 {
+    private getRoomSize(name: AllRooms): vect2 {
         return { x: this.manorData[this.getNameWithIdOrName(name)].data[0].length, y: this.manorData[this.getNameWithIdOrName(name)].data.length }
     }
 

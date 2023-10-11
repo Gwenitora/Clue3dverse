@@ -1,4 +1,4 @@
-declare module 'https://*'
+import { SDK3DVerse_Entity } from "./Types";
 
 declare module 'SDK3DVerse.js' {
   export module _SDK3DVerse {
@@ -15,14 +15,11 @@ declare module 'SDK3DVerse.js' {
     export function onEditorConnected(): Promise<void>;
     export module engineAPI{
       function findEntitiesByEUID(euid : string) : any[];
+      function createEntities(parentEntity: SDK3DVerse_Entity | null, entityTemplates: Object[], ordinal: number) : SDK3DVerse_Entity[];
+      function createEntity(parentEntity: SDK3DVerse_Entity | null, entityTemplates: Object, ordinal: number) : SDK3DVerse_Entity;
     }
-
     export module actionMap{
       function setFrenchKeyboardBindings() : void;
     }
   }
 }
-
-declare module 'https://cdn.3dverse.com/legacy/sdk/stable/SDK3DVerse_VirtualJoystick_Ext.js' {
-    
-} 

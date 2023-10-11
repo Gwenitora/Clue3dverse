@@ -1,11 +1,11 @@
 import { _SDK3DVerse } from "SDK3DVerse.js";
 import AppConfig from "./engine/utils/AppConfig.js";
-import ManorData from "./scripts/generation/manorDataParse.js";
+import ManorGeneration from "./scripts/generation/manor.js";
 
 export default class App {
     INSTANCE?: App;
     public SDK3DVerse: typeof _SDK3DVerse;
-    public ManorData : ManorData;
+    public manor: ManorGeneration;
 
     constructor() {
         if (!this.INSTANCE) {
@@ -13,13 +13,8 @@ export default class App {
         }
 
         this.SDK3DVerse = SDK3DVerse; // TODO: SDK3DVerse is a global variable, do not change this line, and ignore the error !!!
-        this.ManorData = new ManorData();
-    }
-    
-    private async test() {
-        const res = await this.SDK3DVerse.engineAPI.findEntitiesByEUID("ed5186d6-ee8d-416c-a4dd-bef4bb6d9622");
-        console.log("res : ", (res[0] as any).getName());
-        return res;
+
+        this.manor = new ManorGeneration();
     }
 
     private replaceMessage() : void {
@@ -62,20 +57,15 @@ export default class App {
 
         });
 
-        console.log(`connectionInfo: ${JSON.stringify(connectionInfo)}`)
-
         this.SDK3DVerse.setupDisplay(document.getElementById('display_canvas'));
         this.SDK3DVerse.startStreamer(connectionInfo);
 
         this.SDK3DVerse.connectToEditor()
-
         await this.SDK3DVerse.onEditorConnected();
-        console.log("App started");
-        this.test();
-
-        this.replaceMessage()
         
-        console.log(this.ManorData.map)
+        this.replaceMessage()
+
+        console.log("App started");
    }
 }
 
