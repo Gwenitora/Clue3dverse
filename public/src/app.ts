@@ -1,46 +1,57 @@
-import * as SDK3DVerse from "https://cdn.3dverse.com/legacy/sdk/stable/SDK3DVerse.js";
-import { AppConfig } from "./AppConfig.js";
+import { _SDK3DVerse } from "SDK3DVerse.js";
+import AppConfig from "./AppConfig.js";
 
-class App {
+export default class App {
+    INSTANCE?: App;
+    public SDK3DVerse: typeof _SDK3DVerse;
+
     constructor() {
-        console.log(`AppConfig.SCENE_UUID: ${AppConfig.SCENE_UUID}`);
+        if (!this.INSTANCE) {
+            this.INSTANCE = this;
+        }
+
+        this.SDK3DVerse = SDK3DVerse; // TODO: SDK3DVerse is a global variable, do not change this line, and ignore the error !!!
     }
 
-    public async startingScene() {
-        const connectionInfo = await SDK3DVerse.webAPI.createOrJoinSession(AppConfig.SCENE_UUID);
+    public startingScene() {
+        console.log(`SDK3DVerse ${this.SDK3DVerse}`)
+        console.log(`SDK3DVerse.webAPI ${JSON.stringify(this.SDK3DVerse.webAPI)}`)
+        this.SDK3DVerse.webAPI.createOrJoinSession(AppConfig.SCENE_UUID).then((connectionInfo) => {
+            console.log(`connectionInfo: ${JSON.stringify(connectionInfo)}`)
 
-        SDK3DVerse.notifier.on('onLoadingStarted', () => {
+            this.SDK3DVerse.setupDisplay(document.getElementById('display_canvas'));
+            this.SDK3DVerse.startStreamer(connectionInfo);
+
+            console.log("App started");
+        }).catch((err) => {
+            console.error(err);
+        });
+
+        this.SDK3DVerse.notifier.on('onLoadingStarted', () => {
             let message = document.getElementById("message");
             if (message) {
                 message.innerHTML = "Connecting...";
             }
         });
 
-        SDK3DVerse.notifier.on('onLoadingProgress', (status: { message: string }) => {
+        this.SDK3DVerse.notifier.on('onLoadingProgress', (status: { message: string }) => {
             let message = document.getElementById("message");
             if (message) {
                 message.innerHTML = status.message;
             }
         });
 
-        SDK3DVerse.notifier.on('onLoadingEnded', (status: { message: string }) => {
+        this.SDK3DVerse.notifier.on('onLoadingEnded', (status: { message: string }) => {
             let message = document.getElementById("message");
             if (message) {
                 message.innerHTML = status.message;
             }
         });
-
-        SDK3DVerse.setupDisplay(document.getElementById('display_canvas'));
-        SDK3DVerse.startStreamer(connectionInfo);
-
-        console.log("App started");
     }
 }
 
+new App();
 
-const app = new App();
-
-window.addEventListener('load', () =>
-{
-    app.startingScene();
+window.addEventListener('load', () => {
+    new App().INSTANCE?.startingScene();
 });

@@ -3,7 +3,8 @@
     "@3dverse/api": "^0.4.4"
   },
   "devDependencies": {
-    "ts-loader": "^9.5.0",
+    "@types/node": "^20.8.4",
+    "node": "^20.7.0",
     "typescript": "^5.2.2"
   }
 }

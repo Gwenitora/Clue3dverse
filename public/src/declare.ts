@@ -1,14 +1,16 @@
 declare module 'https://*'
 
-declare module 'https://cdn.3dverse.com/legacy/sdk/stable/SDK3DVerse.js' {
-    export namespace webAPI {
-      export function createOrJoinSession(sceneId: string): Promise<any>;
+declare module 'SDK3DVerse.js' {
+  export module _SDK3DVerse {
+    export module webAPI {
+      function createOrJoinSession(sceneId: string): Promise<any | undefined>;
     }
     export module notifier {
       function on(event: string, callback: Function): void;
     }
     export const setupDisplay: (canvas: HTMLElement | null) => void;
     export const startStreamer: (connectionInfo: any) => void;
+  }
 }
 
 declare module 'https://cdn.3dverse.com/legacy/sdk/stable/SDK3DVerse_VirtualJoystick_Ext.js' {

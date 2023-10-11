@@ -8,7 +8,6 @@
     "module": "ES6",
     "jsx": "react",
     "strict": true,
-    "sourceMap": true,
     "forceConsistentCasingInFileNames": true
   },
   "include": [
