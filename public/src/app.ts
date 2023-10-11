@@ -1,5 +1,5 @@
 import { _SDK3DVerse } from "SDK3DVerse.js";
-import AppConfig from "./AppConfig.js";
+import AppConfig from "./engine/utils/AppConfig.js";
 
 export default class App {
     INSTANCE?: App;
