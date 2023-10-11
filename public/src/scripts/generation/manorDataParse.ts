@@ -53,7 +53,7 @@ export default class ManorData {
         coordinates.x -= roomCoordinates.x
         coordinates.y -= roomCoordinates.y
 
-        if (coordinates.x < 0 || coordinates.y < 0 || coordinates.x >=  roomData[0].length || coordinates.y >= roomData.length ) return false
+        if (coordinates.x < 0 || coordinates.y < 0 || coordinates.x >  roomData[0].length || coordinates.y > roomData.length ) return false
 
         return roomData[coordinates.y][coordinates.x]
     }
