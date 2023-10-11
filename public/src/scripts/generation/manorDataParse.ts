@@ -10,7 +10,7 @@ export default class ManorData {
     constructor() {
         this.manorData = rooms;
         this.gameSize = this.getRoomSize(this.defaultRoom);
-        this.map = this.genereMap();
+        this.map = this.genereStringMap();
     }
 
     // ---------------------------------------------------------------------------------------------------------------------------------------------------------- \\
@@ -94,29 +94,32 @@ export default class ManorData {
     // ---------------------------------------------------------------------------------------------------------------------------------------------------------- \\
     // Permet de savoir si l'on se trouve sur les coordonnées rentrées sont sur le plateau de jeu renvoie false si on est sur le plateau et true si on est en dehors
     public getIfVoidOnCoordinates(coordinates: vect2): boolean {
-        // if (coordinates.x === 0 && coordinates.y === 0) console.log(this.getIfRoomsOnCoordinates(coordinates), this.getIfRoomOnCoordinates(this.defaultRoom, coordinates))
         if (this.getIfRoomsOnCoordinates(coordinates)) {
             return this.getIfRoomOnCoordinates(this.defaultRoom, coordinates)
         } else {
             return false
         }
     }
-
-    public getRoomSize(name: AllRoomsNames | AllRoomsIds): vect2 {
+    
+    // ---------------------------------------------------------------------------------------------------------------------------------------------------------- \\
+    // Permet d'obtenir la taille du plateau de jeu en entier
+    private getRoomSize(name: AllRoomsNames | AllRoomsIds): vect2 {
         return { x: this.manorData[this.getNameWithIdOrName(name)].data[0].length, y: this.manorData[this.getNameWithIdOrName(name)].data.length }
     }
 
-    private genereMap(): string {
+    // ---------------------------------------------------------------------------------------------------------------------------------------------------------- \\
+    // Génère un plan au format string de la map actuelle
+    private genereStringMap(): string {
         let map = "";
         let coord = { x: 0, y: 0 }
         for (coord.y = 0; coord.y < this.gameSize.y; coord.y++) {
             for (coord.x = 0; coord.x < this.gameSize.x; coord.x++) {
                 if (this.getIfVoidOnCoordinates(coord)) {
-                    map += "  "
+                    map += "▢"
                 } else if (this.getIfRoomsOnCoordinates(coord)) {
-                    map += "X "
+                    map += "▩"
                 } else {
-                    map += "O "
+                    map += "▣"
                 }
             }
             map += "\n"

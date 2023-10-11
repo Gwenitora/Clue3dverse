@@ -75,7 +75,7 @@ export default class App {
 
         this.replaceMessage()
         
-        // console.log(this.ManorData.map)
+        console.log(this.ManorData.map)
    }
 }
 
