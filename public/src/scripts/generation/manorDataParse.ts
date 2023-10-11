@@ -3,9 +3,12 @@ import { AllRoomsNames, AllRoomsIds, RoomsDataTypes, rooms } from "./manorDatas.
 
 export default class ManorData {
     private manorData: RoomsDataTypes;
+    private defaultRoom: AllRoomsNames = "Corridors";
+    public gameSize: vect2;
 
     constructor() {
         this.manorData = rooms;
+        this.gameSize = this.getRoomSize(this.defaultRoom);
     }
 
     // ---------------------------------------------------------------------------------------------------------------------------------------------------------- \\
@@ -87,11 +90,15 @@ export default class ManorData {
 
     // ---------------------------------------------------------------------------------------------------------------------------------------------------------- \\
     // Permet de savoir si l'on se trouve sur les coordonnées rentrées sont sur le plateau de jeu renvoie false si on est sur le plateau et true si on est en dehors
-    public grtIfVoidOnCoordinates(coordinates: vect2): boolean {
-        if (this.getIfRoomsOnCoordinates(coordinates)) { 
-            return this.getIfRoomOnCoordinates("Corridors", coordinates)
+    public getIfVoidOnCoordinates(coordinates: vect2): boolean {
+        if (this.getIfRoomsOnCoordinates(coordinates)) {
+            return this.getIfRoomOnCoordinates(this.defaultRoom, coordinates)
         } else {
             return false
         }
+    }
+
+    public getRoomSize(name: AllRoomsNames | AllRoomsIds): vect2 {
+        return {x: this.manorData[this.getNameWithIdOrName(name)].data[0].length, y: this.manorData[this.getNameWithIdOrName(name)].data.length}
     }
 }

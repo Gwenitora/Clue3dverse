@@ -66,7 +66,23 @@ export default class App {
         });
 
         this.replaceMessage()
-        console.log(this.ManorData.getIfRoomOnCoordinates("Kitchen", {x: 1, y: 6}))
+
+        let map = "";
+        for (let j = 0; j < this.ManorData.gameSize.y; j++) {
+            for (let i = 0; i < this.ManorData.gameSize.x; i++) {
+                if (this.ManorData.getIfRoomsOnCoordinates({ x: i, y: j })) {
+                    if (this.ManorData.getIfVoidOnCoordinates({ x: i, y: j })) {
+                        map += " "
+                    } else {
+                        map += "X"
+                    }
+                } else {
+                    map += "O"
+                }
+            }
+            map += "\n"
+        }
+        console.log(map)
    }
 }
 
