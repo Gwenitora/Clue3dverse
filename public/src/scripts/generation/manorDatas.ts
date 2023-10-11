@@ -1,12 +1,11 @@
+import { vect2 } from "../../engine/utils/Types";
+
 export type KeyOfObject<T> = keyof T;
 
 export type AllRoomsIds = -1 | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
 
 export type RoomDataType = {
-    coordinates: {
-        x: number,
-        y: number
-    }
+    coordinates: vect2
     id: AllRoomsIds,
     uuid: string,
     data: boolean[][]
