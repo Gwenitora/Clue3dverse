@@ -11,7 +11,6 @@ declare module 'SDK3DVerse.js' {
     }
     export const setupDisplay: (canvas: HTMLElement | null) => void;
     export const startStreamer: (connectionInfo: any) => void;
-
     export module engineAPI{
       function findEntitiesByEUID(euid : string) : {};
     }
@@ -23,7 +22,6 @@ declare module 'SDK3DVerse.js' {
     export module actionMap{
       function setFrenchKeyboardBindings() : void;
     }
-    
   }
 }
 
