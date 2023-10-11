@@ -59,6 +59,21 @@ export default class ManorData {
     }
 
     public getIfRoomsOnCoordinates(coordinates: vect2): boolean {
-        return false
+        let hasRoom = false;
+        for (const key of Object.keys(this.manorData)) {
+            if (this.getIfRoomOnCoordinates(key as AllRoomsNames, coordinates)) {
+                hasRoom = true;
+            }
+        }
+
+        return hasRoom;
+    }
+
+    public grtIfVoidOnCoordinates(coordinates: vect2): boolean {
+        if (this.getIfRoomsOnCoordinates(coordinates)) {
+            return this.getIfRoomOnCoordinates("Corridors", coordinates)
+        } else {
+            return false
+        }
     }
 }
