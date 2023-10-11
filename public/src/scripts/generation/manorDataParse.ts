@@ -59,4 +59,12 @@ export default class ManorData {
 
         return hasRoom;
     }
+
+    public grtIfVoidOnCoordinates(coordinates: vect2): boolean {
+        if (this.getIfRoomsOnCoordinates(coordinates)) {
+            return this.getIfRoomOnCoordinates("Corridors", coordinates)
+        } else {
+            return false
+        }
+    }
 }
