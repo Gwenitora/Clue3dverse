@@ -7,9 +7,13 @@ declare module 'SDK3DVerse.js' {
     }
     export module notifier {
       function on(event: string, callback: Function): void;
+      function off(event: string, callback: Function): void;
     }
     export const setupDisplay: (canvas: HTMLElement | null) => void;
     export const startStreamer: (connectionInfo: any) => void;
+
+    export module engineAPI{
+    }
   }
 }
 

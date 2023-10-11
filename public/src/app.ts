@@ -42,12 +42,25 @@ export default class App {
         });
 
         this.SDK3DVerse.notifier.on('onLoadingEnded', (status: { message: string }) => {
+            
             let message = document.getElementById("message");
             if (message) {
                 message.innerHTML = status.message;
             }
         });
-    }
+
+        function replaceMessage() : void {
+            let message = document.getElementById("message");
+
+            setInterval(replaceMessage, 5000)
+            if (message?.innerHTML){
+                message.innerHTML = "";
+            }
+        }
+        
+        replaceMessage()
+
+   }
 }
 
 new App();
