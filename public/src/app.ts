@@ -18,7 +18,7 @@ export default class App {
     
     private async test() {
         const res = await this.SDK3DVerse.engineAPI.findEntitiesByEUID("ed5186d6-ee8d-416c-a4dd-bef4bb6d9622");
-        console.log("res : ", res);
+        console.log("res : ", (res[0] as any).getName());
         return res;
     }
 
@@ -31,8 +31,7 @@ export default class App {
         }
     }
 
-    public startingScene() {
-        this.test();
+    public async startingScene() {
         console.log(`SDK3DVerse ${this.SDK3DVerse}`)
         console.log(`SDK3DVerse.webAPI ${JSON.stringify(this.SDK3DVerse.webAPI)}`)
         this.SDK3DVerse.webAPI.createOrJoinSession(AppConfig.SCENE_UUID).then((connectionInfo) => {
@@ -41,9 +40,7 @@ export default class App {
             this.SDK3DVerse.setupDisplay(document.getElementById('display_canvas'));
             this.SDK3DVerse.startStreamer(connectionInfo);
 
-            this.SDK3DVerse.connectToEditor().then(() => {
-                console.log("App started");
-            })
+            this.SDK3DVerse.connectToEditor()
         }).catch((err) => {
             console.error(err);
         });
@@ -73,6 +70,10 @@ export default class App {
             // console.log("entité : ", entity)
 
         });
+
+        await this.SDK3DVerse.onEditorConnected();
+        console.log("App started");
+        this.test();
 
         this.replaceMessage()
         

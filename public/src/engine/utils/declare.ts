@@ -12,8 +12,9 @@ declare module 'SDK3DVerse.js' {
     export const setupDisplay: (canvas: HTMLElement | null) => void;
     export const startStreamer: (connectionInfo: any) => void;
     export function connectToEditor(): Promise<void>;
+    export function onEditorConnected(): Promise<void>;
     export module engineAPI{
-      function findEntitiesByEUID(euid : string) : {};
+      function findEntitiesByEUID(euid : string) : any[];
     }
 
     export module actionMap{
