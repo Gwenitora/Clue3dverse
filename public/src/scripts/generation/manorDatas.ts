@@ -1,4 +1,4 @@
-import { vect2 } from "../../engine/utils/Types";
+import { vect2 } from "../../engine/utils/Types.js";
 
 export type KeyOfObject<T> = keyof T;
 

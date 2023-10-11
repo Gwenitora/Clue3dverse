@@ -1,5 +1,5 @@
-import { vect2 } from "../../engine/utils/Types";
-import { AllRoomsNames, AllRoomsIds, RoomsDataTypes, rooms } from "./manorDatas";
+import { vect2 } from "../../engine/utils/Types.js";
+import { AllRoomsNames, AllRoomsIds, RoomsDataTypes, rooms } from "./manorDatas.js";
 
 export default class ManorData {
     private manorData: RoomsDataTypes;
@@ -46,7 +46,16 @@ export default class ManorData {
     }
 
     public getIfRoomOnCoordinates(name: AllRoomsNames | AllRoomsIds, coordinates: vect2): boolean {
-        return this.manorData[this.getNameWithIdOrName(name)].coordinates.x === coordinates.x && this.manorData[this.getNameWithIdOrName(name)].coordinates.y === coordinates.y;
+        const manor = this.manorData[this.getNameWithIdOrName(name)]
+        const roomCoordinates = manor.coordinates;
+        const roomData = manor.data ;
+
+        coordinates.x -= roomCoordinates.x
+        coordinates.y -= roomCoordinates.y
+
+        if (coordinates.x < 0 || coordinates.y < 0 || coordinates.x >=  roomData[0].length || coordinates.y >= roomData.length ) return false
+
+        return roomData[coordinates.y][coordinates.x]
     }
 
     public getIfRoomsOnCoordinates(coordinates: vect2): boolean {

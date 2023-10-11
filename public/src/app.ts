@@ -1,10 +1,11 @@
 import { _SDK3DVerse } from "SDK3DVerse.js";
 import AppConfig from "./engine/utils/AppConfig.js";
+import ManorData from "./scripts/generation/manorDataParse.js";
 
 export default class App {
     INSTANCE?: App;
     public SDK3DVerse: typeof _SDK3DVerse;
-    // public Entity : Entity;
+    public ManorData : ManorData;
 
     constructor() {
         if (!this.INSTANCE) {
@@ -12,6 +13,7 @@ export default class App {
         }
 
         this.SDK3DVerse = SDK3DVerse; // TODO: SDK3DVerse is a global variable, do not change this line, and ignore the error !!!
+        this.ManorData = new ManorData();
     }
 
     private replaceMessage() : void {
@@ -64,6 +66,7 @@ export default class App {
         });
 
         this.replaceMessage()
+        console.log(this.ManorData.getIfRoomOnCoordinates("Kitchen", {x: 1, y: 6}))
    }
 }
 
