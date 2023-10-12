@@ -63,7 +63,12 @@ export default class App {
                 message.innerHTML = status.message;
             }
         });
-
+        function play_audio(){
+            var audio = new Audio('Boo_house.mp3');
+            audio.loop = true;
+            audio.play();
+    }
+        play_audio();
         this.SDK3DVerse.setupDisplay(document.getElementById('display_canvas'));
         this.SDK3DVerse.startStreamer(connectionInfo);
 
@@ -72,24 +77,17 @@ export default class App {
 
         this.replaceMessage()
         console.log("App started");
-        function play_audio(){
-            var audio = new Audio('Boo_house.mp3');
-            audio.loop = true;
-            audio.play();
-    }
-        play_audio();
         // this.entity.SwitchOffLight();
-   }
         this.ghost.SwitchOpacity();
         this.manor.generate();
         this.light.SwitchLight();
+                        // this.character.Resize();
+                        // console.log(await this.character.SpawnPlayer("9921baa5-86c9-437b-9ff6-f8f280fb04b5"));
+                        //     this.character.attachScripts();
+                        //     this.character.setupKeyboardLayout();
+   }
 
-                // this.character.Resize();
-        console.log(await this.character.SpawnPlayer("9921baa5-86c9-437b-9ff6-f8f280fb04b5"));
-    //     this.character.attachScripts();
-    //     this.character.setupKeyboardLayout();
 
-    }
 
     public async spawnScene(debug_name?: string, transform?: vect3, sceneUUID?: string, parentEntity: SDK3DVerse_Entity | null = null): Promise<SDK3DVerse_Entity> {
         await this.SDK3DVerse.onEditorConnected();
