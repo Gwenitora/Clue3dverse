@@ -1,7 +1,7 @@
 import { _SDK3DVerse } from "SDK3DVerse.js";
 import AppConfig from "./engine/utils/AppConfig.js";
 import ManorGeneration from "./scripts/generation/manor.js";
-import { Light } from "./scripts/character/Light.js";
+import { Light } from "./scripts/entity/Light.js";
 
 export default class App {
     INSTANCE?: App;

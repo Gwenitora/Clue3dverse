@@ -25,7 +25,5 @@ export default class ManorGeneration {
             // console.log(entity)
             // console.log(entity, entity?.getGlobalTransform(null));
         });
-
-
     }
 }
