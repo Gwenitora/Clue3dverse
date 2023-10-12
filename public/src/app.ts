@@ -2,12 +2,14 @@ import { _SDK3DVerse } from "SDK3DVerse.js";
 import AppConfig from "./engine/utils/AppConfig.js";
 import ManorGeneration from "./scripts/generation/manor.js";
 import { Light } from "./scripts/entity/Light.js";
+import { Ghost } from "./scripts/entity/Ghost.js";
 
 export default class App {
     INSTANCE?: App;
     public SDK3DVerse: typeof _SDK3DVerse;
     public manor: ManorGeneration;
     public light: Light;
+    public ghost: Ghost;
 
     constructor() {
         if (!this.INSTANCE) {
@@ -18,6 +20,7 @@ export default class App {
 
         this.manor = new ManorGeneration(this.INSTANCE);
         this.light = new Light(this.INSTANCE);
+        this.ghost = new Ghost(this.INSTANCE);
     }
 
     private replaceMessage() : void {
@@ -67,11 +70,16 @@ export default class App {
         await this.SDK3DVerse.onEditorConnected();
         
         this.replaceMessage()
-
         console.log("App started");
-
+        function play_audio(){
+            var audio = new Audio('Boo_house.mp3');
+            audio.loop = true;
+            audio.play();
+    }
+        play_audio();
         // this.entity.SwitchOffLight();
         this.light.SwitchLight();
+        this.ghost.SwitchOpacity();
    }
 }
 

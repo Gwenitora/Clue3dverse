@@ -9,4 +9,5 @@ export class SDK3DVerse_Entity {
     public getComponentList() : string[] {return []};
     public getComponents() : Map<string, Object> {return new Map<string, Object>};
     public setComponent(componentName : string, value : Object){};
+    public setGlobalTransform(globalTransform : Object){};
 }
