@@ -6,12 +6,17 @@ import { SDK3DVerse_Entity, vect2, vect3 } from "../../engine/utils/Types.js";
 
 export class GroundManager {
     private GroundList: { Object: SDK3DVerse_Entity, coordinate: vect2 }[];
+    private App: App;
+    private sizeOf1m: number;
 
-    constructor() {
+    constructor(App: App, sizeOf1m: number) {
         this.GroundList = [];
+        this.App = App;
+        this.sizeOf1m = sizeOf1m;
     }
 
-    public saveNewGround(ground: SDK3DVerse_Entity, coordinate: vect2) {
+    public async saveNewGround(coordinate: vect2, parentElement?: SDK3DVerse_Entity) {
+        const ground: SDK3DVerse_Entity = await this.App.spawnScene(`Ground_x:${coordinate.x}_y:${coordinate.y}`, {x: coordinate.x * this.sizeOf1m,y: 0,z: coordinate.y * this.sizeOf1m}, groundUUID, parentElement);
         this.GroundList.push({ Object: ground, coordinate: coordinate });
     }
 
@@ -26,9 +31,9 @@ export default class ManorGeneration {
     private manorData: ManorData;
     private App: App;
     private SDK3DVerse: typeof _SDK3DVerse;
-    private sizeOf1m = 4.006;
     private rooms: SDK3DVerse_Entity[];
     private ground: GroundManager;
+    private sizeOf1m = 4.006;
 
     constructor(app: App) {
         this.manorData = new ManorData();
@@ -36,7 +41,7 @@ export default class ManorGeneration {
         this.App = app;
         this.SDK3DVerse = this.App.SDK3DVerse;
         this.rooms = [];
-        this.ground = new GroundManager();
+        this.ground = new GroundManager(this.App, this.sizeOf1m);
     }
 
     public async generate() {
@@ -55,11 +60,11 @@ export default class ManorGeneration {
         for (coord.y = 0; coord.y < this.manorData.gameSize.y; coord.y++) {
             for (coord.x = 0; coord.x < this.manorData.gameSize.x; coord.x++) {
                 if (!this.manorData.getIfVoidOnCoordinates(coord) && !this.manorData.getIfRoomsOnCoordinates(coord)) {
-                    const entity: SDK3DVerse_Entity = await this.App.spawnScene(`Ground_x:${coord.x}_y:${coord.y}`, {x: coord.x * this.sizeOf1m,y: 0,z: coord.y * this.sizeOf1m}, groundUUID, grounds);
-                    this.ground.saveNewGround(entity, coord);
+                    this.ground.saveNewGround(coord, grounds);
                 }
             }
         }
+        debugger;
         this.SDK3DVerse.engineAPI.propagateChanges();
     }
 }
