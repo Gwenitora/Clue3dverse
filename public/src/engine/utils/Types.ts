@@ -10,4 +10,5 @@ export class SDK3DVerse_Entity {
     public getComponents() : Map<string, Object> {return new Map<string, Object>};
     public setComponent(componentName : string, value : Object){};
     public setGlobalTransform(globalTransform : Object){};
+    public isAttached(componentName : string ){};
 }

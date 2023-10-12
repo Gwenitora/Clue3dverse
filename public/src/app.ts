@@ -3,6 +3,8 @@ import AppConfig from "./engine/utils/AppConfig.js";
 import ManorGeneration from "./scripts/generation/manor.js";
 import { Light } from "./scripts/entity/Light.js";
 import { Ghost } from "./scripts/entity/Ghost.js";
+import { SDK3DVerse_Entity, vect3 } from "./engine/utils/Types.js";
+import { Character } from "./scripts/entity/Character.js";
 
 export default class App {
     INSTANCE?: App;
@@ -10,6 +12,7 @@ export default class App {
     public manor: ManorGeneration;
     public light: Light;
     public ghost: Ghost;
+    public character: Character;
 
     constructor() {
         if (!this.INSTANCE) {
@@ -19,19 +22,21 @@ export default class App {
         this.SDK3DVerse = SDK3DVerse; // TODO: SDK3DVerse is a global variable, do not change this line, and ignore the error !!!
 
         this.manor = new ManorGeneration(this.INSTANCE);
-        this.light = new Light(this.INSTANCE);
         this.ghost = new Ghost(this.INSTANCE);
+        this.light = new Light(this.INSTANCE, "c030c52e-ee36-4d07-99d9-451ccb3c4932");
+        this.character = new Character(this.INSTANCE);
     }
 
-    private replaceMessage() : void {
+    private replaceMessage(): void {
         let message = document.getElementById("message");
 
         setInterval(this.replaceMessage, 5000)
-        if (message?.innerHTML){
+        if (message?.innerHTML) {
             message.innerHTML = "";
         }
     }
 
+    // ------------------------- Starting scene ----------------------------------------- \\
     public async startingScene() {
         console.log(`SDK3DVerse ${this.SDK3DVerse}`)
         console.log(`SDK3DVerse.webAPI ${JSON.stringify(this.SDK3DVerse.webAPI)}`)
@@ -52,15 +57,11 @@ export default class App {
         });
 
         this.SDK3DVerse.notifier.on('onLoadingEnded', (status: { message: string }) => {
-            
+
             let message = document.getElementById("message");
             if (message) {
                 message.innerHTML = status.message;
             }
-            // console.log(typeof this.SDK3DVerse?.engineAPI.findEntitiesByEUID("ed5186d6-ee8d-416c-a4dd-bef4bb6d9622"))
-            // const entity = this.SDK3DVerse?.engineAPI.findEntitiesByEUID("ed5186d6-ee8d-416c-a4dd-bef4bb6d9622")
-            // console.log("entité : ", entity)
-
         });
 
         this.SDK3DVerse.setupDisplay(document.getElementById('display_canvas'));
@@ -68,7 +69,7 @@ export default class App {
 
         this.SDK3DVerse.connectToEditor()
         await this.SDK3DVerse.onEditorConnected();
-        
+
         this.replaceMessage()
         console.log("App started");
         function play_audio(){
@@ -78,14 +79,41 @@ export default class App {
     }
         play_audio();
         // this.entity.SwitchOffLight();
-        this.light.SwitchLight();
-        this.ghost.SwitchOpacity();
    }
+        this.ghost.SwitchOpacity();
+        this.manor.generate();
+        this.light.SwitchLight();
+
+                // this.character.Resize();
+        console.log(await this.character.SpawnPlayer("9921baa5-86c9-437b-9ff6-f8f280fb04b5"));
+    //     this.character.attachScripts();
+    //     this.character.setupKeyboardLayout();
+
+    }
+
+    public async spawnScene(debug_name?: string, transform?: vect3, sceneUUID?: string, parentEntity: SDK3DVerse_Entity | null = null): Promise<SDK3DVerse_Entity> {
+        await this.SDK3DVerse.onEditorConnected();
+        let template: any = {};
+        this.SDK3DVerse.utils.resolveComponentDependencies(template, 'debug_name');
+        this.SDK3DVerse.utils.resolveComponentDependencies(template, 'local_transform');
+        if (debug_name) {
+            template.debug_name.value = debug_name;
+        }
+        if (transform) {
+            template.local_transform.position = [transform?.x, transform?.y, transform?.z];
+        }
+        if (sceneUUID) {
+            this.SDK3DVerse.utils.resolveComponentDependencies(template, 'scene_ref');
+            template.scene_ref.value = sceneUUID;
+        }
+
+        const scene = await this.SDK3DVerse.engineAPI.spawnEntity(parentEntity, template);
+        return scene;
+    }
 }
 
 new App();
 
 window.addEventListener('load', () => {
     new App().INSTANCE?.startingScene();
-    new App().INSTANCE?.SDK3DVerse.actionMap.setFrenchKeyboardBindings();
 });
