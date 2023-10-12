@@ -22,17 +22,14 @@ export class Ghost {
             const ghost2 = await this.SDK3DVerse?.engineAPI.findEntitiesByEUID(this.ghost2.uuid)
             if (!ghost2) {return}
             this.ghost2.object = ghost2[0]
-            console.log(this.ghost2.object)
         }
         if (!this.ghost.object) {
             const ghost = await this.SDK3DVerse?.engineAPI.findEntitiesByEUID(this.ghost.uuid)
             if (!ghost) {return}
             this.ghost.object = ghost[0]
-            console.log(this.ghost.object)
         }
         this.SDK3DVerse?.engineAPI.setEntityVisibility(this.ghost.object,opacity)
         this.SDK3DVerse?.engineAPI.setEntityVisibility(this.ghost2.object,opacity)
-        console.log(this.ghost.object.getGlobalTransform(this.ghost.object));
         if(opacity)
         {{this.ghost.object.setGlobalTransform({"position":[Math.random()*20,Math.random()*20,Math.random()*20],"eulerOrientation":[0,(Math.random()*1000)%360,0],"scale":[scale,scale,0.1]});}
         {this.ghost2.object.setGlobalTransform({"position":[Math.random()*20,Math.random()*20,Math.random()*20],"eulerOrientation":[0,(Math.random()*1000)%360,0],"scale":[scale2,scale2,scale2]});}}

@@ -38,8 +38,6 @@ export default class App {
 
     // ------------------------- Starting scene ----------------------------------------- \\
     public async startingScene() {
-        console.log(`SDK3DVerse ${this.SDK3DVerse}`)
-        console.log(`SDK3DVerse.webAPI ${JSON.stringify(this.SDK3DVerse.webAPI)}`)
         const connectionInfo = await this.SDK3DVerse.webAPI.createSession(AppConfig.SCENE_UUID)
 
         this.SDK3DVerse.notifier.on('onLoadingStarted', () => {
@@ -81,10 +79,6 @@ export default class App {
         this.ghost.SwitchOpacity();
         this.manor.generate();
         this.light.SwitchLight();
-                        // this.character.Resize();
-                        // console.log(await this.character.SpawnPlayer("9921baa5-86c9-437b-9ff6-f8f280fb04b5"));
-                        //     this.character.attachScripts();
-                        //     this.character.setupKeyboardLayout();
    }
 
 

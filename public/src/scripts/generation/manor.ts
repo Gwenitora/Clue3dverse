@@ -40,6 +40,7 @@ export default class ManorGeneration {
     }
 
     public async generate() {
+        console.log(this.manorData.map);
         await this.SDK3DVerse?.onEditorConnected();
         const centering: vect3 = { x: -this.manorData.gameSize.x / 2 * this.sizeOf1m, y: 0, z: -this.manorData.gameSize.y / 2 * this.sizeOf1m };
         const game = await this.App.spawnScene("Game", {x: 0, y:0, z:0});
