@@ -64,7 +64,6 @@ export default class ManorGeneration {
                 }
             }
         }
-        debugger;
         this.SDK3DVerse.engineAPI.propagateChanges();
     }
 }
