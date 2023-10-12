@@ -1,11 +1,13 @@
 import { _SDK3DVerse } from "SDK3DVerse.js";
 import AppConfig from "./engine/utils/AppConfig.js";
 import ManorGeneration from "./scripts/generation/manor.js";
+import { Light } from "./scripts/character/Light.js";
 
 export default class App {
     INSTANCE?: App;
     public SDK3DVerse: typeof _SDK3DVerse;
     public manor: ManorGeneration;
+    public light: Light;
 
     constructor() {
         if (!this.INSTANCE) {
@@ -15,6 +17,7 @@ export default class App {
         this.SDK3DVerse = SDK3DVerse; // TODO: SDK3DVerse is a global variable, do not change this line, and ignore the error !!!
 
         this.manor = new ManorGeneration(this.INSTANCE);
+        this.light = new Light(this.INSTANCE);
     }
 
     private replaceMessage() : void {
@@ -66,6 +69,9 @@ export default class App {
         this.replaceMessage()
 
         console.log("App started");
+
+        // this.entity.SwitchOffLight();
+        this.light.SwitchLight();
    }
 }
 

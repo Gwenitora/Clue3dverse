@@ -14,9 +14,10 @@ declare module 'SDK3DVerse.js' {
     export function connectToEditor(): Promise<void>;
     export function onEditorConnected(): Promise<void>;
     export module engineAPI{
-      function findEntitiesByEUID(euid : string) : any[];
+      function findEntitiesByEUID(euid : string) : SDK3DVerse_Entity[];
       function createEntities(parentEntity: SDK3DVerse_Entity | null, entityTemplates: Object[], ordinal: number) : SDK3DVerse_Entity[];
       function createEntity(parentEntity: SDK3DVerse_Entity | null, entityTemplates: Object, ordinal: number) : SDK3DVerse_Entity;
+      function propagateChanges (propagater? : string) : void;
     }
     export module actionMap{
       function setFrenchKeyboardBindings() : void;

@@ -4,4 +4,9 @@ export type quaternion = {x : number, y : number, z : number, w : number};
 export class SDK3DVerse_Entity {
     constructor(){};
     public getGlobalTransform(stopAtParent: SDK3DVerse_Entity | null){};
+    public getName(defaultName?: any) : string {return""};
+    public getComponent(componentName?: any ) : Object {return new Object};
+    public getComponentList() : string[] {return []};
+    public getComponents() : Map<string, Object> {return new Map<string, Object>};
+    public setComponent(componentName : string, value : Object){};
 }
