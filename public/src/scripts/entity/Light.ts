@@ -27,13 +27,20 @@ export class Light {
     }
 
     public async SwitchLight(){
+        // Toutes les 4 sec clignotes 2 fois (intervale de 100ms)
         setTimeout(() => {  
             this.SetLightIntesity(10);
             setTimeout(() => {
                 this.SetLightIntesity(0);
-                this.SwitchLight();
-            }, 1000);
-        },1000);
+                setTimeout(() => {
+                    this.SetLightIntesity(10);
+                    setTimeout(() => {
+                        this.SetLightIntesity(0);
+                        this.SwitchLight();
+                    }, Math.random()*300+25);
+                }, Math.random()*300+25);
+            }, Math.random()*300+25);
+        },4000);
     }
     
 }
