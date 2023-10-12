@@ -2,6 +2,7 @@ import { _SDK3DVerse } from "SDK3DVerse.js";
 import AppConfig from "./engine/utils/AppConfig.js";
 import ManorGeneration from "./scripts/generation/manor.js";
 import { Light } from "./scripts/entity/Light.js";
+import { Ghost } from "./scripts/entity/Ghost.js";
 import { SDK3DVerse_Entity, vect3 } from "./engine/utils/Types.js";
 import { Character } from "./scripts/entity/Character.js";
 
@@ -10,6 +11,7 @@ export default class App {
     public SDK3DVerse: typeof _SDK3DVerse;
     public manor: ManorGeneration;
     public light: Light;
+    public ghost: Ghost;
     public character: Character;
 
     constructor() {
@@ -20,6 +22,7 @@ export default class App {
         this.SDK3DVerse = SDK3DVerse; // TODO: SDK3DVerse is a global variable, do not change this line, and ignore the error !!!
 
         this.manor = new ManorGeneration(this.INSTANCE);
+        this.ghost = new Ghost(this.INSTANCE);
         this.light = new Light(this.INSTANCE, "c030c52e-ee36-4d07-99d9-451ccb3c4932");
         this.character = new Character(this.INSTANCE);
     }
@@ -68,9 +71,16 @@ export default class App {
         await this.SDK3DVerse.onEditorConnected();
 
         this.replaceMessage()
-
         console.log("App started");
-
+        function play_audio(){
+            var audio = new Audio('Boo_house.mp3');
+            audio.loop = true;
+            audio.play();
+    }
+        play_audio();
+        // this.entity.SwitchOffLight();
+   }
+        this.ghost.SwitchOpacity();
         this.manor.generate();
         this.light.SwitchLight();
 

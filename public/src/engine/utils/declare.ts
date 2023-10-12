@@ -27,6 +27,7 @@ declare module 'SDK3DVerse.js' {
       function createEntity(parentEntity: SDK3DVerse_Entity | null, entityTemplates: Object, ordinal: number) : SDK3DVerse_Entity;
       function propagateChanges (propagater? : string) : void;
       function spawnEntity(parentEntity: SDK3DVerse_Entity | null, entityTemplates: Object) : SDK3DVerse_Entity;
+      function setEntityVisibility(entity : SDK3DVerse_Entity,isVisible : boolean) : void;
       function getEntityChildren(entity : SDK3DVerse_Entity) : SDK3DVerse_Entity[];
       function fireEvent(eventMapUUID : string, eventName : string, entities?: SDK3DVerse_Entity, dataObject?: Object) : void;
       function deleteEntities(entities : SDK3DVerse_Entity) : void;
