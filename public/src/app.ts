@@ -14,7 +14,7 @@ export default class App {
 
         this.SDK3DVerse = SDK3DVerse; // TODO: SDK3DVerse is a global variable, do not change this line, and ignore the error !!!
 
-        this.manor = new ManorGeneration();
+        this.manor = new ManorGeneration(this.INSTANCE);
     }
 
     private replaceMessage() : void {
