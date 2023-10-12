@@ -164,34 +164,17 @@ export const rooms: RoomsDataTypes = {
     },
     Library: { //* NOTE -Library- NOTE *//
         coordinates: {
-            x: 17,
+            x: 18,
             y: 14
         },
         id: 6,
-        uuid: "e11c454c-734e-4206-96c4-4e5f5cf3313e",
+        uuid: "2d051cd0-5786-48b1-9a9e-4d199e74a983",
         data: [
             [false, true, true, true, true, true, false],
             [true, true, true, true, true, true, true],
             [true, true, true, true, true, true, true],
             [true, true, true, true, true, true, true],
             [false, true, true, true, true, true, false],
-        ]
-    },
-    MainHall: { //* NOTE -Hall- NOTE *//
-        coordinates: {
-            x: 9,
-            y: 18
-        },
-        id: 8,
-        uuid: "1597a2c6-faff-4aa4-8ba4-0a7a96fa4df8",
-        data: [
-            [true, true, true, true, true, true],
-            [true, true, true, true, true, true],
-            [true, true, true, true, true, true],
-            [true, true, true, true, true, true],
-            [true, true, true, true, true, true],
-            [true, true, true, true, true, true],
-            [true, true, true, true, true, true],
         ]
     },
     Hall: { //* NOTE -MainHall- NOTE *//
@@ -200,7 +183,7 @@ export const rooms: RoomsDataTypes = {
             y: 19
         },
         id: 7,
-        uuid: "f488b39a-5437-48e6-bdd1-4ca7e2f9d15d",
+        uuid: "1597a2c6-faff-4aa4-8ba4-0a7a96fa4df8",
         data: [
             [true, true, true, true, true, true, true],
             [true, true, true, true, true, true, true],
@@ -208,6 +191,23 @@ export const rooms: RoomsDataTypes = {
             [true, true, true, true, true, true, true],
             [true, true, true, true, true, true, true],
             [true, true, true, true, true, true, false]
+        ]
+    },
+    MainHall: { //* NOTE -Hall- NOTE *//
+        coordinates: {
+            x: 9,
+            y: 18
+        },
+        id: 8,
+        uuid: "f488b39a-5437-48e6-bdd1-4ca7e2f9d15d",
+        data: [
+            [true, true, true, true, true, true],
+            [true, true, true, true, true, true],
+            [true, true, true, true, true, true],
+            [true, true, true, true, true, true],
+            [true, true, true, true, true, true],
+            [true, true, true, true, true, true],
+            [true, true, true, true, true, true],
         ]
     },
     Office: { //* NOTE -Office- NOTE *//
@@ -225,4 +225,5 @@ export const rooms: RoomsDataTypes = {
         ]
     }
 }
+export const groundUUID = "c666a5c2-ef3b-4e0e-a943-f25e16fdd902";
 // 24x25
