@@ -11,19 +11,21 @@ export default class ManorGeneration {
     constructor(app: App) {
         this.manorData = new ManorData();
 
-        this.generate();
         this.App = app;
-        this.SDK3DVerse = app.SDK3DVerse;
+        this.SDK3DVerse = this.App.SDK3DVerse;
+        this.generate();
     }
 
     private async generate() {
         await this.SDK3DVerse?.onEditorConnected();
         Object.values(rooms).forEach(async (roomName) => {
-            // const entity = await this.SDK3DVerse?.engineAPI.createEntity(null, {uuid: this.manorData.getRoomUUID(roomName.id)}, this.manorData.getIdWithNameOrId(roomName.id));
+            // const playerTemplate = { debug_name: { value: 'Player' } };
+            // this.SDK3DVerse?.utils.resolveComponentDependencies(playerTemplate, 'local_transform');
+            // const entity = await this.SDK3DVerse?.engineAPI.spawnEntity(null, playerTemplate);
             // console.log(entity)
             // console.log(entity, entity?.getGlobalTransform(null));
         });
-            
-        
+
+
     }
 }

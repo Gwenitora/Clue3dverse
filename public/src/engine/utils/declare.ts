@@ -18,9 +18,13 @@ declare module 'SDK3DVerse.js' {
       function createEntities(parentEntity: SDK3DVerse_Entity | null, entityTemplates: Object[], ordinal: number) : SDK3DVerse_Entity[];
       function createEntity(parentEntity: SDK3DVerse_Entity | null, entityTemplates: Object, ordinal: number) : SDK3DVerse_Entity;
       function propagateChanges (propagater? : string) : void;
+      function spawnEntity(parentEntity: SDK3DVerse_Entity | null, entityTemplates: Object) : SDK3DVerse_Entity;
     }
-    export module actionMap{
+    export module actionMap {
       function setFrenchKeyboardBindings() : void;
+    }
+    export module utils {
+      function resolveComponentDependencies(entityTemplate: Object, componentName: string) : void;
     }
   }
 }
