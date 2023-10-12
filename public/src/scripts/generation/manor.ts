@@ -13,7 +13,7 @@ export default class ManorGeneration {
 
         this.generate();
         this.App = app;
-        this.SDK3DVerse = app.SDK3DVerse;
+        this.SDK3DVerse = this.App.SDK3DVerse;
     }
 
     private async generate() {
