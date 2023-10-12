@@ -3,12 +3,14 @@ import AppConfig from "./engine/utils/AppConfig.js";
 import ManorGeneration from "./scripts/generation/manor.js";
 import { Light } from "./scripts/entity/Light.js";
 import { SDK3DVerse_Entity, vect3 } from "./engine/utils/Types.js";
+import { Character } from "./scripts/entity/Character.js";
 
 export default class App {
     INSTANCE?: App;
     public SDK3DVerse: typeof _SDK3DVerse;
     public manor: ManorGeneration;
     public light: Light;
+    public character: Character;
 
     constructor() {
         if (!this.INSTANCE) {
@@ -19,6 +21,7 @@ export default class App {
 
         this.manor = new ManorGeneration(this.INSTANCE);
         this.light = new Light(this.INSTANCE, "c030c52e-ee36-4d07-99d9-451ccb3c4932");
+        this.character = new Character(this.INSTANCE);
     }
 
     private replaceMessage(): void {
@@ -30,10 +33,11 @@ export default class App {
         }
     }
 
+    // ------------------------- Starting scene ----------------------------------------- \\
     public async startingScene() {
         console.log(`SDK3DVerse ${this.SDK3DVerse}`)
         console.log(`SDK3DVerse.webAPI ${JSON.stringify(this.SDK3DVerse.webAPI)}`)
-        const connectionInfo = await this.SDK3DVerse.webAPI.createSession(AppConfig.SCENE_UUID)
+        const connectionInfo = await this.SDK3DVerse.webAPI.createOrJoinSession(AppConfig.SCENE_UUID)
 
         this.SDK3DVerse.notifier.on('onLoadingStarted', () => {
             let message = document.getElementById("message");
@@ -55,10 +59,6 @@ export default class App {
             if (message) {
                 message.innerHTML = status.message;
             }
-            // console.log(typeof this.SDK3DVerse?.engineAPI.findEntitiesByEUID("ed5186d6-ee8d-416c-a4dd-bef4bb6d9622"))
-            // const entity = this.SDK3DVerse?.engineAPI.findEntitiesByEUID("ed5186d6-ee8d-416c-a4dd-bef4bb6d9622")
-            // console.log("entité : ", entity)
-
         });
 
         this.SDK3DVerse.setupDisplay(document.getElementById('display_canvas'));
@@ -73,6 +73,12 @@ export default class App {
 
         this.manor.generate();
         this.light.SwitchLight();
+
+                // this.character.Resize();
+        console.log(await this.character.SpawnPlayer("9921baa5-86c9-437b-9ff6-f8f280fb04b5"));
+    //     this.character.attachScripts();
+    //     this.character.setupKeyboardLayout();
+
     }
 
     public async spawnScene(debug_name?: string, transform?: vect3, sceneUUID?: string, parentEntity: SDK3DVerse_Entity | null = null): Promise<SDK3DVerse_Entity> {
@@ -97,22 +103,6 @@ export default class App {
 }
 
 new App();
-
-
-async function  setupKeyboardLayout(event : any)
-{
-    if((event.code === "KeyA" && event.key !== "a") ||
-    (event.code === "KeyQ" && event.key !== "q") ||
-    (event.code === "KeyZ" && event.key !== "z") ||
-    (event.code === "KeyW" && event.key !== "w"))
-    {
-        new App().INSTANCE?.SDK3DVerse.actionMap.setFrenchKeyboardBindings();
-        window.removeEventListener('keydown', setupKeyboardLayout);
-        await new App().INSTANCE?.SDK3DVerse.onConnected();
-        new App().INSTANCE?.SDK3DVerse.actionMap.propagate();
-    }
-}
-window.addEventListener('keydown', setupKeyboardLayout);
 
 window.addEventListener('load', () => {
     new App().INSTANCE?.startingScene();
