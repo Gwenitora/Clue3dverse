@@ -98,7 +98,22 @@ export default class App {
 
 new App();
 
+
+async function  setupKeyboardLayout(event : any)
+{
+    if((event.code === "KeyA" && event.key !== "a") ||
+    (event.code === "KeyQ" && event.key !== "q") ||
+    (event.code === "KeyZ" && event.key !== "z") ||
+    (event.code === "KeyW" && event.key !== "w"))
+    {
+        new App().INSTANCE?.SDK3DVerse.actionMap.setFrenchKeyboardBindings();
+        window.removeEventListener('keydown', setupKeyboardLayout);
+        await new App().INSTANCE?.SDK3DVerse.onConnected();
+        new App().INSTANCE?.SDK3DVerse.actionMap.propagate();
+    }
+}
+window.addEventListener('keydown', setupKeyboardLayout);
+
 window.addEventListener('load', () => {
     new App().INSTANCE?.startingScene();
-    new App().INSTANCE?.SDK3DVerse.actionMap.setFrenchKeyboardBindings();
 });
