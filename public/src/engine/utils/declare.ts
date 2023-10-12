@@ -12,6 +12,7 @@ declare module 'SDK3DVerse.js' {
     export const setupDisplay: (canvas: HTMLElement | null) => void;
     export const startStreamer: (connectionInfo: any) => void;
     export function connectToEditor(): Promise<void>;
+    export function onConnected(): Promise<void>;
     export function onEditorConnected(): Promise<void>;
     export module engineAPI{
       function findEntitiesByEUID(euid : string) : SDK3DVerse_Entity[];
@@ -22,9 +23,11 @@ declare module 'SDK3DVerse.js' {
     }
     export module actionMap {
       function setFrenchKeyboardBindings() : void;
+      function propagate() : void;
     }
     export module utils {
       function resolveComponentDependencies(entityTemplate: Object, componentName: string) : void;
     }
+
   }
 }
