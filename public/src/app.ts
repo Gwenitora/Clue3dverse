@@ -17,7 +17,7 @@ export default class App {
         this.SDK3DVerse = SDK3DVerse; // TODO: SDK3DVerse is a global variable, do not change this line, and ignore the error !!!
 
         this.manor = new ManorGeneration(this.INSTANCE);
-        this.light = new Light(this.INSTANCE);
+        this.light = new Light(this.INSTANCE, "c030c52e-ee36-4d07-99d9-451ccb3c4932");
     }
 
     private replaceMessage() : void {
@@ -70,7 +70,6 @@ export default class App {
 
         console.log("App started");
 
-        // this.entity.SwitchOffLight();
         this.light.SwitchLight();
    }
 }

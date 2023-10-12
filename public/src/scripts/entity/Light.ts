@@ -7,29 +7,33 @@ export class Light {
     private App: App;
     private light: {object?: SDK3DVerse_Entity, uuid: string};
 
-    constructor(app : App){
+    constructor(app : App, uuid : string){
         this.SDK3DVerse = app.SDK3DVerse;
         this.App = app;
-        this.light = {uuid: "c030c52e-ee36-4d07-99d9-451ccb3c4932"};
+        this.light = {uuid: uuid};
     }
 
     public async SetLightIntesity(intensity: number){
         if (!this.light.object) {
-            this.light.object = await this.SDK3DVerse?.engineAPI.findEntitiesByEUID(this.light.uuid)[0]
+            const light = await this.SDK3DVerse?.engineAPI.findEntitiesByEUID(this.light.uuid)
+            if(!light){
+                return 
+            }
+            this.light.object = light[0];
         }
-        if (!this.light.object) return
-        this.light.object.setComponent("point_light", {"intensity" : intensity})
+        this.light.object?.setComponent("point_light", {"intensity" : intensity})
         this.SDK3DVerse?.engineAPI.propagateChanges();
 
     }
 
     public async SwitchLight(){
-        setTimeout(() => {
-            this.SetLightIntesity(15)
+        setTimeout(() => {  
+            this.SetLightIntesity(10);
             setTimeout(() => {
-                this.SetLightIntesity(0)
-            }, 10000);
-        },10000);
+                this.SetLightIntesity(0);
+                this.SwitchLight();
+            }, 1000);
+        },1000);
     }
     
 }
