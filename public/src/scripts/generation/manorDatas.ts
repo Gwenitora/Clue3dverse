@@ -225,5 +225,5 @@ export const rooms: RoomsDataTypes = {
         ]
     }
 }
-export const groundUUID = "c666a5c2-ef3b-4e0e-a943-f25e16fdd902";
+export const groundUUID = "9000f90a-9790-4335-97fa-11c9f8f3c79b";
 // 24x25
