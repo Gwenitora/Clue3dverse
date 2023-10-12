@@ -46,8 +46,8 @@ export class Character {
     {
     // const cameraScriptUUID = Object.keys(cameraEntity.getComponent("script_map").elements).pop();
     // const controllerScriptUUID  = Object.keys(characterController.getComponent("script_map").elements).pop();
-    const cameraScriptUUID = Object.keys(cameraEntity.getComponent("script_map") as Record<string, any>).pop();
-    const controllerScriptUUID = Object.keys(characterController.getComponent("script_map") as Record<string, any>).pop();
+    const cameraScriptUUID = Object.keys(cameraEntity.getComponent("script_map").elements).pop();
+    const controllerScriptUUID = Object.keys(characterController.getComponent("script_map").elements).pop();
 
     if (!cameraScriptUUID || !controllerScriptUUID) return // test error
 
