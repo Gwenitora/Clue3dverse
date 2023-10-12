@@ -121,7 +121,7 @@ export const rooms: RoomsDataTypes = {
             y: 1
         },
         id: 3,
-        uuid: "",
+        uuid: "813fe7b0-d5b7-465b-9370-261bc281a7cc",
         data: [
             [true, true, true, true, true, true],
             [true, true, true, true, true, true],
@@ -168,7 +168,7 @@ export const rooms: RoomsDataTypes = {
             y: 14
         },
         id: 6,
-        uuid: "2d051cd0-5786-48b1-9a9e-4d199e74a983",
+        uuid: "e11c454c-734e-4206-96c4-4e5f5cf3313e",
         data: [
             [false, true, true, true, true, true, false],
             [true, true, true, true, true, true, true],
@@ -177,23 +177,7 @@ export const rooms: RoomsDataTypes = {
             [false, true, true, true, true, true, false],
         ]
     },
-    MainHall: { //* NOTE -MainHall- NOTE *//
-        coordinates: {
-            x: 0,
-            y: 19
-        },
-        id: 7,
-        uuid: "",
-        data: [
-            [true, true, true, true, true, true, true],
-            [true, true, true, true, true, true, true],
-            [true, true, true, true, true, true, true],
-            [true, true, true, true, true, true, true],
-            [true, true, true, true, true, true, true],
-            [true, true, true, true, true, true, false]
-        ]
-    },
-    Hall: { //* NOTE -Hall- NOTE *//
+    MainHall: { //* NOTE -Hall- NOTE *//
         coordinates: {
             x: 9,
             y: 18
@@ -208,6 +192,22 @@ export const rooms: RoomsDataTypes = {
             [true, true, true, true, true, true],
             [true, true, true, true, true, true],
             [true, true, true, true, true, true],
+        ]
+    },
+    Hall: { //* NOTE -MainHall- NOTE *//
+        coordinates: {
+            x: 0,
+            y: 19
+        },
+        id: 7,
+        uuid: "f488b39a-5437-48e6-bdd1-4ca7e2f9d15d",
+        data: [
+            [true, true, true, true, true, true, true],
+            [true, true, true, true, true, true, true],
+            [true, true, true, true, true, true, true],
+            [true, true, true, true, true, true, true],
+            [true, true, true, true, true, true, true],
+            [true, true, true, true, true, true, false]
         ]
     },
     Office: { //* NOTE -Office- NOTE *//
