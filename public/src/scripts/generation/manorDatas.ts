@@ -36,7 +36,7 @@ export const rooms: RoomsDataTypes = {
             y: 0
         },
         id: 0,
-        uuid: "c666a5c2-ef3b-4e0e-a943-f25e16fdd902",
+        uuid: "c3d9207b-0f31-4a54-906f-b06190848c1d",
         data: [
             [true, true, true, true, true, true, true, true, true, false, true, true, true, true, false, true, true, true, true, true, true, true, true, true],
             [false, false, false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, true, false, false, false, false, false, false],
