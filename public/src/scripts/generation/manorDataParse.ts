@@ -15,13 +15,13 @@ export default class ManorData {
 
     // ---------------------------------------------------------------------------------------------------------------------------------------------------------- \\
     // Permet d'avoir l'id d'une pièce avec son nom
-    public getIdWithName(name: AllRoomsNames): AllRoomsIds {
+    private getIdWithName(name: AllRoomsNames): AllRoomsIds {
         return this.manorData[name].id;
     }
 
     // ---------------------------------------------------------------------------------------------------------------------------------------------------------- \\
     // Permet d'avoir le nom d'une pièce avec son id
-    public getNameWithId(id: AllRoomsIds): AllRoomsNames {
+    private getNameWithId(id: AllRoomsIds): AllRoomsNames {
         for (const name in this.manorData) {
             if (this.manorData[name as AllRoomsNames]?.id === id) {
                 return name as AllRoomsNames;
