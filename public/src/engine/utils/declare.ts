@@ -13,13 +13,17 @@ declare module 'SDK3DVerse.js' {
     export const startStreamer: (connectionInfo: any) => void;
     export function connectToEditor(): Promise<void>;
     export function onEditorConnected(): Promise<void>;
-    export module engineAPI{
+    export module engineAPI {
       function findEntitiesByEUID(euid : string) : any[];
       function createEntities(parentEntity: SDK3DVerse_Entity | null, entityTemplates: Object[], ordinal: number) : SDK3DVerse_Entity[];
       function createEntity(parentEntity: SDK3DVerse_Entity | null, entityTemplates: Object, ordinal: number) : SDK3DVerse_Entity;
+      function spawnEntity(parentEntity: SDK3DVerse_Entity | null, entityTemplates: Object) : SDK3DVerse_Entity;
     }
-    export module actionMap{
+    export module actionMap {
       function setFrenchKeyboardBindings() : void;
+    }
+    export module utils {
+      function resolveComponentDependencies(entityTemplate: Object, componentName: string) : void;
     }
   }
 }
