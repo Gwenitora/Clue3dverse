@@ -45,7 +45,7 @@ export class Character {
     public attachScripts(cameraEntity : SDK3DVerse_Entity, characterController : SDK3DVerse_Entity)
     {
     const cameraScriptUUID = Object.keys(cameraEntity.getComponent("script_map").elements).pop();
-    const controllerScriptUUID  = Object.keys(characterController.getComponent("script_map").elements).pop();
+    const controllerScriptUUID = Object.keys(characterController.getComponent("script_map").elements).pop();
 
     if (!cameraScriptUUID || !controllerScriptUUID) return // test error
 

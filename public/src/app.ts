@@ -38,8 +38,6 @@ export default class App {
 
     // ------------------------- Starting scene ----------------------------------------- \\
     public async startingScene() {
-        console.log(`SDK3DVerse ${this.SDK3DVerse}`)
-        console.log(`SDK3DVerse.webAPI ${JSON.stringify(this.SDK3DVerse.webAPI)}`)
         const connectionInfo = await this.SDK3DVerse.webAPI.createSession(AppConfig.SCENE_UUID)
 
         this.SDK3DVerse.notifier.on('onLoadingStarted', () => {
