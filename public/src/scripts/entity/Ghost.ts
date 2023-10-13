@@ -7,7 +7,6 @@ export class Ghost {
     private App: App;
     private ghost: {object?: SDK3DVerse_Entity, uuid: string};
     private ghost2: {object?: SDK3DVerse_Entity, uuid: string};
-
     constructor(app : App){
         this.SDK3DVerse = app.SDK3DVerse;
         this.App = app;

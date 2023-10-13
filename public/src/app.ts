@@ -13,14 +13,12 @@ export default class App {
     public light: Light;
     public ghost: Ghost;
     public character: Character;
-
     constructor() {
         if (!this.INSTANCE) {
             this.INSTANCE = this;
         }
 
         this.SDK3DVerse = SDK3DVerse; // TODO: SDK3DVerse is a global variable, do not change this line, and ignore the error !!!
-
         this.manor = new ManorGeneration(this.INSTANCE);
         this.ghost = new Ghost(this.INSTANCE);
         this.light = new Light(this.INSTANCE, "c030c52e-ee36-4d07-99d9-451ccb3c4932");
@@ -74,6 +72,7 @@ export default class App {
 
         this.replaceMessage()
         console.log("App started");
+        console.log("test")
         // this.entity.SwitchOffLight();
         this.ghost.SwitchOpacity();
         this.manor.generate();
@@ -95,14 +94,14 @@ export default class App {
     
     if (state.eventListener) {
         document.addEventListener('click', clickListener);
-    }
+    }                   
                        const test = await this.character.SpawnPlayer("9921baa5-86c9-437b-9ff6-f8f280fb04b5");
                         if(test?.cameraEntity){
-                            console.log(test.cameraEntity)
-                            console.log(test.characterController)
-                            this.character.attachScripts(test.cameraEntity,test.characterController);}
-                            addEventListener("keypress", (event) => {this.character.setupKeyboardLayout(event);});
-                            this.character.Resize();
+                        console.log(test.cameraEntity)
+                        console.log(test.characterController)
+                        this.character.attachScripts(test.cameraEntity,test.characterController);}
+                        addEventListener("keypress", (event) => {this.character.setupKeyboardLayout(event);});
+                        this.character.Resize();
    }
 
 
