@@ -40,7 +40,7 @@ export default class App {
     public async startingScene() {
         console.log(`SDK3DVerse ${this.SDK3DVerse}`)
         console.log(`SDK3DVerse.webAPI ${JSON.stringify(this.SDK3DVerse.webAPI)}`)
-        const connectionInfo = await this.SDK3DVerse.webAPI.createOrJoinSession(AppConfig.SCENE_UUID)
+        const connectionInfo = await this.SDK3DVerse.webAPI.createSession(AppConfig.SCENE_UUID)
 
         this.SDK3DVerse.notifier.on('onLoadingStarted', () => {
             let message = document.getElementById("message");
@@ -63,13 +63,12 @@ export default class App {
                 message.innerHTML = status.message;
             }
         });
-        function play_audio(){
-            var audio = new Audio('Boo_house.mp3');
-            audio.loop = true;
-            audio.play();
-    }
-        play_audio();
         this.SDK3DVerse.setupDisplay(document.getElementById('display_canvas'));
+        // this.SDK3DVerse.setViewports([{
+        //     id                      : 0,
+        //     left                    : 0, top: 0, width: 1, height: 1,
+        //     defaultControllerType   : 4,
+        // }]);
         this.SDK3DVerse.startStreamer(connectionInfo);
 
         this.SDK3DVerse.connectToEditor()
@@ -81,10 +80,31 @@ export default class App {
         this.ghost.SwitchOpacity();
         this.manor.generate();
         this.light.SwitchLight();
-                        // this.character.Resize();
-                        // console.log(await this.character.SpawnPlayer("9921baa5-86c9-437b-9ff6-f8f280fb04b5"));
-                        //     this.character.attachScripts();
-                        //     this.character.setupKeyboardLayout();
+        function play_audio(){
+            var audio = new Audio('Boo_house.mp3');
+            audio.loop = true;
+            audio.play();
+    }
+    const state = {
+        eventListener: true
+    };
+    
+    function clickListener() {
+        play_audio();
+        state.eventListener = false;
+        document.removeEventListener('click', clickListener);
+    }
+    
+    if (state.eventListener) {
+        document.addEventListener('click', clickListener);
+    }
+                       const test = await this.character.SpawnPlayer("9921baa5-86c9-437b-9ff6-f8f280fb04b5");
+                        if(test?.cameraEntity){
+                            console.log(test.cameraEntity)
+                            console.log(test.characterController)
+                            this.character.attachScripts(test.cameraEntity,test.characterController);}
+                            addEventListener("keypress", (event) => {this.character.setupKeyboardLayout(event);});
+                            this.character.Resize();
    }
 
 
