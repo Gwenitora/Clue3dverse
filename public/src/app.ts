@@ -57,7 +57,7 @@ export default class App {
 
     // ------------------------- Starting scene ----------------------------------------- \\
     public async startingScene() {
-        const connectionInfo = await this.SDK3DVerse.webAPI.createSession(AppConfig.SCENE_UUID)
+        const connectionInfo = await this.SDK3DVerse.webAPI.createOrJoinSession(AppConfig.SCENE_UUID)
 
         this.SDK3DVerse.notifier.on('onLoadingStarted', () => {
             let message = document.getElementById("message");
@@ -94,7 +94,7 @@ export default class App {
         this.replaceMessage()
         console.log("App started");
         this.ghost.SwitchOpacity();
-        this.manor.generate();
+        // this.manor.generate();
 
         //
         this.light_bathroom.SwitchLight();
