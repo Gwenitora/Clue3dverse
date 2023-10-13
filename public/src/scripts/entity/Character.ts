@@ -29,8 +29,11 @@ export class Character {
         console.log("enfants:")
         const joe = await this.SDK3DVerse?.engineAPI.getEntityChildren(playerEntity)
         if(joe){
-            console.log(joe[0])
-        joe[0].setGlobalTransform({"scale":[3.5,3.5,3.5],"position":[0,10,0]});
+            if (joe[0].getComponent("capsule_geometry"))
+        {joe[0].setGlobalTransform({"scale":[3.5,3.5,3.5],"position":[0,10,0]});}
+        else{
+            joe[1].setGlobalTransform({"scale":[3.5,3.5,3.5],"position":[0,10,0]});
+        }
     }
         // playerEntity.setGlobalTransform({"scale":[3.5,3.5,3.5],"position":[0,10,0]});
         // this.SDK3DVerse?.engineAPI.propagateChanges();
