@@ -5,6 +5,7 @@ import { Light } from "./scripts/entity/Light.js";
 import { Ghost } from "./scripts/entity/Ghost.js";
 import { SDK3DVerse_Entity, vect3 } from "./engine/utils/Types.js";
 import { Character } from "./scripts/entity/Character.js";
+import { Camera } from "./scripts/generation/camera.js";
 
 export default class App {
     INSTANCE?: App;
@@ -22,6 +23,7 @@ export default class App {
 
     public ghost: Ghost;
     public character: Character;
+    public camera: Camera
     constructor() {
         if (!this.INSTANCE) {
             this.INSTANCE = this;
@@ -41,6 +43,7 @@ export default class App {
         //
 
         this.character = new Character(this.INSTANCE);
+        this.camera = new Camera(this.INSTANCE)
     }
 
     private replaceMessage(): void {
