@@ -1,10 +1,10 @@
-import { SDK3DVerse_Entity } from "./Types";
+import { SDK3DVerse_Entity, connectionInfo } from "./Types";
 
 declare module 'SDK3DVerse.js' {
   export module _SDK3DVerse {
     export module webAPI {
-      function createOrJoinSession(sceneId: string): Promise<any | undefined>;
-      function createSession(sceneId: string): Promise<any | undefined>;
+      function createOrJoinSession(sceneId: string): Promise<connectionInfo | undefined>;
+      function createSession(sceneId: string): Promise<connectionInfo | undefined>;
     }
     export module notifier {
       function on(event: string, callback: Function): void;

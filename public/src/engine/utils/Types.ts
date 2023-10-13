@@ -12,3 +12,7 @@ export class SDK3DVerse_Entity {
     public setGlobalTransform(globalTransform : Object){};
     public isAttached(componentName : string ){};
 }
+export class connectionInfo {
+    public sessionCreated: boolean = true;
+    constructor(){};
+}
