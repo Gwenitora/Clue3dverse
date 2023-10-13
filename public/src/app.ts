@@ -10,7 +10,16 @@ export default class App {
     INSTANCE?: App;
     public SDK3DVerse: typeof _SDK3DVerse;
     public manor: ManorGeneration;
-    public light: Light;
+
+    //
+    public light_livingRoom: Light;
+    public light_mainHall: Light;
+    public light_library: Light;
+    public light_bathroom: Light;
+    public light_corridor1: Light;
+    public light_corridor2: Light;
+    //
+
     public ghost: Ghost;
     public character: Character;
     constructor() {
@@ -21,7 +30,16 @@ export default class App {
         this.SDK3DVerse = SDK3DVerse; // TODO: SDK3DVerse is a global variable, do not change this line, and ignore the error !!!
         this.manor = new ManorGeneration(this.INSTANCE);
         this.ghost = new Ghost(this.INSTANCE);
-        this.light = new Light(this.INSTANCE, "c030c52e-ee36-4d07-99d9-451ccb3c4932");
+
+        //
+        this.light_livingRoom = new Light(this.INSTANCE, "29402f8a-2156-4238-bd73-d26830bef8fd");
+        this.light_mainHall = new Light(this.INSTANCE, "8b352849-54e8-4da3-9c07-9f9532b7346d");
+        this.light_library = new Light(this.INSTANCE, "0534a686-c3ec-45ae-975e-e7402c45de92");
+        this.light_bathroom = new Light(this.INSTANCE, "5821bb1a-228b-4d1f-91be-567680a20ea8");
+        this.light_corridor1 = new Light(this.INSTANCE, "3a69ee5d-5e4d-4cd6-9f02-1e46b2afa2cb");
+        this.light_corridor2 = new Light(this.INSTANCE, "d9f08f9b-85d4-4fcd-a864-b1cd0b8bfbc5");
+        //
+
         this.character = new Character(this.INSTANCE);
     }
 
@@ -72,11 +90,18 @@ export default class App {
 
         this.replaceMessage()
         console.log("App started");
-        console.log("test")
-        // this.entity.SwitchOffLight();
         this.ghost.SwitchOpacity();
         this.manor.generate();
-        this.light.SwitchLight();
+
+        //
+        this.light_bathroom.SwitchLight();
+        this.light_corridor1.SwitchLight();
+        this.light_corridor2.SwitchLight();
+        this.light_library.SwitchLight();
+        this.light_livingRoom.SwitchLight();
+        this.light_mainHall.SwitchLight();
+        //
+
         function play_audio(){
             var audio = new Audio('Boo_house.mp3');
             audio.loop = true;
