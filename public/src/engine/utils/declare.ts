@@ -32,6 +32,9 @@ declare module 'SDK3DVerse.js' {
       function fireEvent(eventMapUUID : string, eventName : string, entities?: SDK3DVerse_Entity, dataObject?: Object) : void;
       function deleteEntities(entities : SDK3DVerse_Entity) : void;
       function attachToScript(entity: SDK3DVerse_Entity, scriptUUID: string) : void;
+      export module cameraAPI{
+        function getDefaultCameraValues():Object;
+      }
     }
     export module actionMap {
       function setFrenchKeyboardBindings() : void;
@@ -39,6 +42,7 @@ declare module 'SDK3DVerse.js' {
     }
     export module utils {
       function resolveComponentDependencies(entityTemplate: Object, componentName: string) : void;
+      export const invalidUUID : string;
     }
 
   }

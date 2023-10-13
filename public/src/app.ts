@@ -80,6 +80,7 @@ export default class App {
                 message.innerHTML = status.message;
             }
         });
+        this.SDK3DVerse.setViewports(null);
         this.SDK3DVerse.setupDisplay(document.getElementById('display_canvas'));
         // this.SDK3DVerse.setViewports([{
         //     id                      : 0,
@@ -105,32 +106,43 @@ export default class App {
         this.light_mainHall.SwitchLight();
         //
 
-        function play_audio(){
+        function play_audio() {
             var audio = new Audio('Boo_house.mp3');
             audio.loop = true;
             audio.play();
+        }
+        const state = {
+            eventListener: true
+        };
+
+        function clickListener() {
+            play_audio();
+            state.eventListener = false;
+            document.removeEventListener('click', clickListener);
+        }
+
+        if (state.eventListener) {
+            document.addEventListener('click', clickListener);
+        }
+        const test = await this.character.SpawnPlayer("9921baa5-86c9-437b-9ff6-f8f280fb04b5");
+        if (test?.cameraEntity) {
+            console.log(test.cameraEntity)
+            console.log(test.characterController)
+            this.character.attachScripts(test.cameraEntity, test.characterController);
+        }
+        addEventListener("keypress", (event) => { this.character.setupKeyboardLayout(event); });
+        this.character.Resize();
+        await this.SDK3DVerse.setViewports([
+            {
+                id: 0,
+                left: 0, top: 0, width: 1, height: 1,
+                defaultControllerType: -1,
+                camera: test?.cameraEntity,
+                defaultCameraValues: this.SDK3DVerse.engineAPI.cameraAPI.getDefaultCameraValues(),
+            }
+        ]);
+        this.SDK3DVerse.engineAPI.fireEvent(this.SDK3DVerse.utils.invalidUUID, "start_simulation");
     }
-    const state = {
-        eventListener: true
-    };
-    
-    function clickListener() {
-        play_audio();
-        state.eventListener = false;
-        document.removeEventListener('click', clickListener);
-    }
-    
-    if (state.eventListener) {
-        document.addEventListener('click', clickListener);
-    }                   
-                       const test = await this.character.SpawnPlayer("9921baa5-86c9-437b-9ff6-f8f280fb04b5");
-                        if(test?.cameraEntity){
-                        console.log(test.cameraEntity)
-                        console.log(test.characterController)
-                        this.character.attachScripts(test.cameraEntity,test.characterController);}
-                        addEventListener("keypress", (event) => {this.character.setupKeyboardLayout(event);});
-                        this.character.Resize();
-   }
 
 
 
