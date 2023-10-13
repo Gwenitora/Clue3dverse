@@ -1,7 +1,7 @@
 import { _SDK3DVerse } from "SDK3DVerse.js";
 import App from "../../app.js";
 import ManorData from "./manorDataParse.js";
-import { groundUUID, rooms } from "./manorDatas.js";
+import { RoomDataType, groundUUID, rooms } from "./manorDatas.js";
 import { SDK3DVerse_Entity, vect2, vect3 } from "../../engine/utils/Types.js";
 
 export class GroundManager {
@@ -53,8 +53,7 @@ export default class ManorGeneration {
         const grounds = await this.App.spawnScene("GROUND_CONTROLLER", centering, undefined, game);
 
         Object.values(rooms).forEach(async (roomData) => {
-            const entity: SDK3DVerse_Entity = await this.App.spawnScene(this.manorData.getNameWithIdOrName(roomData.id), { x: roomData.coordinates.x * this.sizeOf1m, y: 0, z: roomData.coordinates.y * this.sizeOf1m }, roomData.uuid, scene);
-            this.rooms.push(entity);
+            this.createNewRoom(roomData, scene);
         });
         let coord = { x: 0, y: 0 }
         for (coord.y = 0; coord.y < this.manorData.gameSize.y; coord.y++) {
@@ -65,5 +64,10 @@ export default class ManorGeneration {
             }
         }
         this.SDK3DVerse.engineAPI.propagateChanges();
+    }
+
+    private async createNewRoom(roomData: RoomDataType, parentElement?: SDK3DVerse_Entity) {
+        const entity: SDK3DVerse_Entity = await this.App.spawnScene(this.manorData.getNameWithIdOrName(roomData.id), { x: roomData.coordinates.x * this.sizeOf1m, y: 0, z: roomData.coordinates.y * this.sizeOf1m }, roomData.uuid, parentElement);
+        this.rooms.push(entity);
     }
 }
