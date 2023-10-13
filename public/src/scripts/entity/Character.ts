@@ -28,13 +28,13 @@ export class Character {
         if (!playerEntity) return // try error
         console.log("enfants:")
         const joe = await this.SDK3DVerse?.engineAPI.getEntityChildren(playerEntity)
-        if(joe){
-            if (joe[0].getComponent("capsule_geometry"))
-        {joe[0].setGlobalTransform({"position":[0,10,0]});}
-        else{
-            joe[1].setGlobalTransform({"position":[0,10,0]});
-        }
-    }
+    //     if(joe){
+    //         if (joe[0].getComponent("capsule_geometry"))
+    //     {joe[0].setGlobalTransform({"position":[0,10,0]});}
+    //     else{
+    //         joe[1].setGlobalTransform({"position":[0,10,0]});
+    //     }
+    // }
         // playerEntity.setGlobalTransform({"scale":[3.5,3.5,3.5],"position":[0,10,0]});
         // this.SDK3DVerse?.engineAPI.propagateChanges();
         let   children                  = await  this.SDK3DVerse?.engineAPI.getEntityChildren(playerEntity);
