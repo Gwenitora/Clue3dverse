@@ -5,7 +5,6 @@ import { SDK3DVerse_Entity } from "../../engine/utils/Types.js";
 export class Character {
     private SDK3DVerse?: typeof _SDK3DVerse;
     private App: App;
-
     constructor(app : App){
         this.SDK3DVerse = app.SDK3DVerse;
         this.App = app;
@@ -15,7 +14,7 @@ export class Character {
     public async SpawnPlayer(characterControllerSceneUUID : string)
     {
         console.log("Prepping up your player's avatar...");
-    
+        
         const playerTemplate : any = { debug_name : {value : 'Player'} };
         this.SDK3DVerse?.utils.resolveComponentDependencies(playerTemplate, 'scene_ref');
     
@@ -25,27 +24,30 @@ export class Character {
         //const startPositions            = await SDK3DVerse.engineAPI.findEntitiesByNames("Start Position 1", "Start Position 2");
         //const rnd                       = Math.floor(Math.random() * startPositions.length);
         //playerTemplate.local_transform  = startPositions[rnd].getComponent('local_transform');
-    
         const playerEntity              = await  this.SDK3DVerse?.engineAPI.spawnEntity(null, playerTemplate);
         if (!playerEntity) return // try error
-
+        console.log("enfants:")
+        const joe = await this.SDK3DVerse?.engineAPI.getEntityChildren(playerEntity)
+        if(joe){
+            console.log(joe[0])
+        joe[0].setGlobalTransform({"scale":[3.5,3.5,3.5],"position":[0,10,0]});
+    }
+        // playerEntity.setGlobalTransform({"scale":[3.5,3.5,3.5],"position":[0,10,0]});
+        // this.SDK3DVerse?.engineAPI.propagateChanges();
         let   children                  = await  this.SDK3DVerse?.engineAPI.getEntityChildren(playerEntity);
         const cameraEntity              = children?.find((child) => child.isAttached('camera'));
-        const characterController       = children?.find((child) => child.isAttached('character_controller'));
-    
+        const characterController       = children?.find((child) => child.isAttached('character_controller'))
         console.log("Awaiting teleportation accreditation...");
 
         if (!characterController) return //try error
-    
         children = await  this.SDK3DVerse?.engineAPI.getEntityChildren(characterController);
-    
         return { playerEntity, cameraEntity, characterController};
     }
 
     public attachScripts(cameraEntity : SDK3DVerse_Entity, characterController : SDK3DVerse_Entity)
     {
     const cameraScriptUUID = Object.keys(cameraEntity.getComponent("script_map").elements).pop();
-    const controllerScriptUUID = Object.keys(characterController.getComponent("script_map").elements).pop();
+    const controllerScriptUUID  = Object.keys(characterController.getComponent("script_map").elements).pop();
 
     if (!cameraScriptUUID || !controllerScriptUUID) return // test error
 
